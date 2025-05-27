@@ -1,16 +1,9 @@
 let humanScore = 0, computerScore = 0;
 
 const getComputerChoice = () => {
-    let choice = Math.floor(Math.random() * 3)
-
-    switch(choice) {
-        case 0:
-            return 'rock';
-        case 1:
-            return 'paper';
-        case 2:
-            return 'scissors';
-    }
+    let random = Math.floor(Math.random() * 3)
+    const choices = ["rock", "paper", "scissor"];
+    return choices[random];
 }
 
 const getHumanChoice = () => {
