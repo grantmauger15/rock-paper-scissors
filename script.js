@@ -1,4 +1,4 @@
-let humanScore, computerScore = 0
+let humanScore = 0, computerScore = 0;
 
 const getComputerChoice = () => {
     let choice = Math.floor(Math.random() * 3)
@@ -55,5 +55,24 @@ const playRound = (humanChoice, computerChoice) => {
             console.log("You lose! Paper beats Rock.");
             computerScore++;
         }
+    }
+}
+
+const playGame = () => {
+    for(let i = 0; i < 5; i++) {
+        let humanChoice = getHumanChoice()
+        let computerChoice = getComputerChoice()
+
+        playRound(humanChoice, computerChoice)
+    }
+
+    if(humanScore > computerScore) {
+        console.log(`You won! Score: ${humanScore}-${computerScore}`);
+    }
+    else if(humanScore == computerScore) {
+        console.log(`There is a draw! Score: ${humanScore}-${computerScore}`);
+    }
+    else {
+        console.log(`You lose! Score: ${humanScore}-${computerScore}`);
     }
 }
