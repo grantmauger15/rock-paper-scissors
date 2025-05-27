@@ -3,7 +3,7 @@ let humanScore = 0, computerScore = 0;
 const getComputerChoice = () => {
     let random = Math.floor(Math.random() * 3)
     const choices = ["rock", "paper", "scissor"];
-    return choices[random-1];
+    return choices[random];
 }
 
 const getHumanChoice = () => {
