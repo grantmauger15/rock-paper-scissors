@@ -1,85 +1,71 @@
 let humanScore = 0, computerScore = 0;
-const choices = document.querySelector('#choices');
-const output = document.querySelector('#output > h1');
-const score = document.querySelector('#output > h2');
-const winner = document.querySelector("#output > h3");
-
-choices.addEventListener("click", (e) => {
-    switch(e.target.id) {
-        case 'rock':
-            playRound('rock', getComputerChoice());
-            break;
-        case 'paper':
-            playRound('paper', getComputerChoice());
-            break;
-        case 'scissors':
-            playRound('scissors', getComputerChoice());
-            break;
-    }
-    updateScore();
-});
 
 const getComputerChoice = () => {
-    let choice = Math.floor(Math.random() * 3)
+    let random = Math.floor(Math.random() * 3)
+    const choices = ["rock", "paper", "scissor"];
+    return choices[random];
+}
 
-    switch(choice) {
-        case 0:
-            return 'rock';
-        case 1:
-            return 'paper';
-        case 2:
-            return 'scissors';
-    }
+const getHumanChoice = () => {
+    let humanChoice = prompt("Enter rock, paper, or scissors");
+
+    return humanChoice;
 }
 
 const playRound = (humanChoice, computerChoice) => {
-    if(humanChoice === computerChoice) {
-        output.textContent = "There is a tie! No one wins.";
+    humanChoice = humanChoice.toLowerCase();
+
+    if(humanChoice == computerChoice) {
+        console.log("There is a tie! No one wins.");
     }
-    else if(humanChoice === "scissors") {
-        if(computerChoice === "paper") {
-            
-            output.textContent = "You win! Scissors beats Paper.";
+    else if(humanChoice == "scissors") {
+        if(computerChoice == "paper") {
+            console.log("You win! Scissors beats Paper.");
             humanScore++;
         }
         else {
-            output.textContent = "You lose! Rock beats Scissors.";
+            console.log("You lose! Rock beats Scissors.");
             computerScore++;
         }
         
     }
-    else if(humanChoice === "paper") {
-        if(computerChoice === "rock") {
-            output.textContent = "You win! Paper beats Rock.";
+    else if(humanChoice == "paper") {
+        if(computerChoice == "rock") {
+            console.log("You win! Paper beats Rock.");
             humanScore++;
         }
         else {
-            output.textContent = "You lose! Scissors beats Paper.";
+            console.log("You lose! Scissors beats Paper.");
             computerScore++;
         }
     }
     else {
-        if(computerChoice === "scissors") {
-            output.textContent = "You win! Rock beats Scissors.";
+        if(computerChoice == "scissors") {
+            console.log("You win! Rock beats Scissors.");
             humanScore++;
         }
         else {
-            output.textContent = "You lose! Paper beats Rock.";
+            console.log("You lose! Paper beats Rock.");
             computerScore++;
         }
     }
 }
 
-const updateScore = () => {
-    score.textContent = `Player: ${humanScore}, Computer: ${computerScore}`;
-    winner.textContent = '';
-    if(humanScore === 5) {
-        winner.textContent = 'The player won! The game is reset.';
-        humanScore = 0, computerScore = 0;
-    }
-    if(computerScore === 5) {
-        winner.textContent = 'The computer won! The game is reset.';
-        humanScore = 0, computerScore = 0;
+const playGame = () => {
+    for(let i = 0; i < 5; i++) {
+        let humanChoice = getHumanChoice()
+        let computerChoice = getComputerChoice()
+
+        playRound(humanChoice, computerChoice)
     }
 
+    if(humanScore > computerScore) {
+        console.log(`You won! Score: ${humanScore}-${computerScore}`);
+    }
+    else if(humanScore == computerScore) {
+        console.log(`There is a draw! Score: ${humanScore}-${computerScore}`);
+    }
+    else {
+        console.log(`You lose! Score: ${humanScore}-${computerScore}`);
+    }
 }
